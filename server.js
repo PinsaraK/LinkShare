@@ -21,6 +21,11 @@ app.post("/shortUrls", async (req, res) => {
   res.redirect("/");
 });
 
+app.post("/shortUrlDelete", async (req, res) => {
+  const shortUrl = await ShortUrl.deleteMany({});
+  res.redirect("/");
+});
+
 app.get("/:shortUrl", async (req, res) => {
   const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl });
 
@@ -30,4 +35,5 @@ app.get("/:shortUrl", async (req, res) => {
 
   res.redirect(shortUrl.full);
 });
+
 app.listen(process.env.PORT || 5000);
